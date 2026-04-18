@@ -6,7 +6,7 @@ const CANDLE_WINDOW_HOURS = 24;
 const REQUEST_HEADERS = {
   "content-type": "application/json",
   accept: "application/json",
-  "user-agent": "weekend-monitor-hyperliquid/0.1",
+  "user-agent": "hyperliquid-monitor/0.1",
 };
 
 let assetContextsPromise = null;

@@ -1,5 +1,5 @@
 const GITHUB_OWNER = "harunamitrader";
-const GITHUB_REPO = "weekend_monitor_hyperliquid";
+const GITHUB_REPO = "Hyperliquid-monitor";
 const GITHUB_WORKFLOW = "update-data.yml";
 const GITHUB_REF = "main";
 
@@ -26,7 +26,7 @@ async function dispatchWorkflow(env) {
         accept: "application/vnd.github+json",
         authorization: `Bearer ${token}`,
         "content-type": "application/json",
-        "user-agent": "weekend-monitor-hyperliquid-dispatcher",
+        "user-agent": "hyperliquid-monitor-dispatcher",
       },
       body: JSON.stringify({
         ref: GITHUB_REF,

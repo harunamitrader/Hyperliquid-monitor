@@ -1,6 +1,6 @@
-# Hyperliquid Weekend Monitor
+# Hyperliquid Monitor
 
-公開ページ予定: `https://harunamitrader.github.io/weekend_monitor_hyperliquid/`
+公開ページ予定: `https://harunamitrader.github.io/Hyperliquid-monitor/`
 
 Hyperliquid 上の trade[XYZ] / `xyz` マーケットを 5 分ごとに取得し、GitHub Pages で公開するためのシンプルな監視ページです。
 
@@ -72,7 +72,7 @@ npm run build:data
 
 ## GitHub 公開手順
 
-1. このフォルダを `harunamitrader/weekend_monitor_hyperliquid` などの public GitHub リポジトリとして push する
+1. このフォルダを `harunamitrader/Hyperliquid-monitor` の public GitHub リポジトリとして push する
 2. GitHub の `Settings > Actions > General` で Workflow permissions を `Read and write permissions` にする
 3. GitHub の `Settings > Pages` で `Deploy from a branch` を選ぶ
 4. ブランチは `main`、公開フォルダは `/docs` を指定する
@@ -89,7 +89,7 @@ npm run build:data
 
 Worker secret:
 
-- `GITHUB_TOKEN`: `harunamitrader/weekend_monitor_hyperliquid` に対する Actions write 権限を持つ fine-grained GitHub token
+- `GITHUB_TOKEN`: `harunamitrader/Hyperliquid-monitor` に対する Actions write 権限を持つ fine-grained GitHub token
 
 ## OSSメモ
 

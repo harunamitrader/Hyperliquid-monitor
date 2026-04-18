@@ -4,7 +4,7 @@ This Worker triggers the GitHub Actions workflow that updates Hyperliquid market
 
 ## Secret
 
-- `GITHUB_TOKEN`: fine-grained GitHub token with Actions write access to `harunamitrader/weekend_monitor_hyperliquid`
+- `GITHUB_TOKEN`: fine-grained GitHub token with Actions write access to `harunamitrader/Hyperliquid-monitor`
 
 ## Cron
 
