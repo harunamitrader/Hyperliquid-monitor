@@ -1,0 +1,146 @@
+[
+  {
+    "id": "sp500",
+    "marketId": "xyz:SP500",
+    "name": "SP500",
+    "url": "https://app.trade.xyz/?market=SP500",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "xyz100",
+    "marketId": "xyz:XYZ100",
+    "name": "XYZ100",
+    "url": "https://app.trade.xyz/?market=XYZ100",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "jp225-usdc",
+    "marketId": "xyz:JP225",
+    "name": "JP225-USDC",
+    "url": "https://app.trade.xyz/?market=JP225",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "jp225-jpy",
+    "marketId": "derived:JP225JPY",
+    "name": "JP225-JPY",
+    "url": "https://app.trade.xyz/?market=JP225",
+    "derived": {
+      "operation": "multiply",
+      "sources": ["xyz:JP225", "xyz:JPY"]
+    },
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "usdjpy",
+    "marketId": "xyz:JPY",
+    "name": "USDJPY",
+    "url": "https://app.trade.xyz/?market=JPY",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "eurusd",
+    "marketId": "xyz:EUR",
+    "name": "EURUSD",
+    "url": "https://app.trade.xyz/?market=EUR",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "gold",
+    "marketId": "xyz:GOLD",
+    "name": "Gold",
+    "url": "https://app.trade.xyz/?market=GOLD",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "silver",
+    "marketId": "xyz:SILVER",
+    "name": "Silver",
+    "url": "https://app.trade.xyz/?market=SILVER",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "wti-oil",
+    "marketId": "xyz:CL",
+    "name": "WTI Oil",
+    "url": "https://app.trade.xyz/?market=CL",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "brent-oil",
+    "marketId": "xyz:BRENTOIL",
+    "name": "Brent Oil",
+    "url": "https://app.trade.xyz/?market=BRENTOIL",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "natural-gas",
+    "marketId": "xyz:NATGAS",
+    "name": "Natural Gas",
+    "url": "https://app.trade.xyz/?market=NATGAS",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "copper",
+    "marketId": "xyz:COPPER",
+    "name": "Copper",
+    "url": "https://app.trade.xyz/?market=COPPER",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "ewj",
+    "marketId": "xyz:EWJ",
+    "name": "EWJ",
+    "url": "https://app.trade.xyz/?market=EWJ",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  },
+  {
+    "id": "ewy",
+    "marketId": "xyz:EWY",
+    "name": "EWY",
+    "url": "https://app.trade.xyz/?market=EWY",
+    "baselineTimezone": "America/New_York",
+    "baselineCutoverHourLocal": 17,
+    "baselineCutoverMinuteLocal": 0,
+    "baselineCutoverLabelJa": "06:00/07:00 JST"
+  }
+]

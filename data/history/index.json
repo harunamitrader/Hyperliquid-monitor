@@ -1,0 +1,12 @@
+{
+  "timezone": "Asia/Tokyo",
+  "files": [
+    {
+      "date": "2026-04-19",
+      "file": "data/history/2026-04-19.json",
+      "runCount": 2,
+      "latestUpdatedAt": "2026-04-18T21:50:59.987Z"
+    }
+  ],
+  "updatedAt": "2026-04-18T21:50:59.987Z"
+}

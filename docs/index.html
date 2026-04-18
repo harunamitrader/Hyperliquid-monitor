@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hyperliquid Weekend Monitor</title>
+    <meta
+      name="description"
+      content="Hyperliquid XYZ markets の現在値と基準値をシンプルに確認するページ"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260419a" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">Hyperliquid XYZ Markets</p>
+        <div class="hero-row">
+          <h1>Hyperliquid Weekend Monitor</h1>
+          <a
+            class="hero-link"
+            href="https://app.trade.xyz/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            trade.xyz
+          </a>
+        </div>
+        <div class="hero-meta">
+          <p id="summary-text" class="summary-text">14 銘柄 / 読み込み中</p>
+          <p id="updated-at" class="updated-at">読み込み中</p>
+        </div>
+      </header>
+
+      <main>
+        <section class="market-headline">
+          <div class="headline-cell">銘柄</div>
+          <div class="headline-cell align-right">現在値</div>
+          <div class="headline-cell align-right">基準値</div>
+          <div class="headline-cell align-right">前日比</div>
+          <div class="headline-cell align-right">変化率</div>
+        </section>
+
+        <section id="market-grid" class="market-grid" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <template id="market-card-template">
+      <article class="market-card">
+        <div class="market-title-group">
+          <a class="market-name market-name-link" target="_blank" rel="noreferrer"></a>
+          <p class="market-baseline"></p>
+        </div>
+        <div class="market-metric">
+          <span class="metric-label">現在値</span>
+          <span class="metric-value current-price"></span>
+        </div>
+        <div class="market-metric">
+          <span class="metric-label">基準値</span>
+          <span class="metric-value baseline-price"></span>
+        </div>
+        <div class="market-metric">
+          <span class="metric-label">前日比</span>
+          <span class="metric-value change-value"></span>
+        </div>
+        <div class="market-metric">
+          <span class="metric-label">変化率</span>
+          <span class="metric-value change-percent"></span>
+        </div>
+        <div class="market-chart-row">
+          <button type="button" class="chart-trigger">
+            <span class="chart-trigger-label">24H</span>
+            <svg
+              class="chart-sparkline"
+              viewBox="0 0 192 108"
+              preserveAspectRatio="xMidYMid meet"
+              aria-hidden="true"
+            ></svg>
+          </button>
+        </div>
+      </article>
+    </template>
+
+    <dialog id="chart-dialog" class="chart-dialog">
+      <form method="dialog" class="chart-dialog-shell">
+        <div class="chart-dialog-header">
+          <div>
+            <p id="chart-dialog-caption" class="chart-dialog-caption">過去72時間</p>
+            <h2 id="chart-dialog-title" class="chart-dialog-title"></h2>
+          </div>
+          <button class="chart-dialog-close" value="close">閉じる</button>
+        </div>
+        <p id="chart-dialog-meta" class="chart-dialog-meta"></p>
+        <div class="chart-dialog-body">
+          <svg
+            id="chart-dialog-svg"
+            class="chart-dialog-svg"
+            viewBox="0 0 800 450"
+            preserveAspectRatio="xMidYMid meet"
+            aria-hidden="true"
+          ></svg>
+        </div>
+        <div class="chart-dialog-range">
+          <span id="chart-dialog-start"></span>
+          <span id="chart-dialog-end"></span>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="./app.js?v=20260419a"></script>
+  </body>
+</html>
