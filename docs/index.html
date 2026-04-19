@@ -8,7 +8,7 @@
       name="description"
       content="Hyperliquid markets の現在値と基準値をシンプルに確認するページ"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260419a" />
+    <link rel="stylesheet" href="./styles.css?v=20260419b" />
   </head>
   <body>
     <div class="page-shell">
@@ -27,7 +27,10 @@
         </div>
         <div class="hero-meta">
           <p id="summary-text" class="summary-text">14 銘柄 / 読み込み中</p>
-          <p id="updated-at" class="updated-at">読み込み中</p>
+          <div class="hero-status">
+            <p id="updated-at" class="updated-at">読み込み中</p>
+            <p class="baseline-note">週末の±は金曜終値基準です</p>
+          </div>
         </div>
       </header>
 
@@ -106,6 +109,6 @@
       </form>
     </dialog>
 
-    <script type="module" src="./app.js?v=20260419a"></script>
+    <script type="module" src="./app.js?v=20260419b"></script>
   </body>
 </html>

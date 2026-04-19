@@ -602,7 +602,7 @@ function updateChartDialog(market, chartPayload, timezone) {
     renderDetailedChart(chartDialogSvg, points, timezone, {
       width: 800,
       height: 450,
-      highlightAfter: market.baselineSnapshotCapturedAt,
+      highlightAfter: market.baselineHighlightAfter ?? market.baselineSnapshotCapturedAt,
       referenceLines: [
         { value: market.baselinePrice, className: "is-baseline", label: "基準値" },
         { value: market.currentPrice, className: "is-current", label: "現在値" },
@@ -659,7 +659,7 @@ function renderMarket(market, chartPayload, timezone) {
   renderSparkline(sparklineSvg, sparklinePoints, {
     width: 192,
     height: 108,
-    highlightAfter: market.baselineSnapshotCapturedAt,
+    highlightAfter: market.baselineHighlightAfter ?? market.baselineSnapshotCapturedAt,
     referenceLines: [
       { value: market.baselinePrice, className: "is-baseline" },
       { value: market.currentPrice, className: "is-current" },

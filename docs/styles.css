@@ -104,8 +104,20 @@ h1 {
 }
 
 .summary-text,
-.updated-at {
+.updated-at,
+.baseline-note {
   margin: 0;
+}
+
+.hero-status {
+  display: grid;
+  gap: 4px;
+  justify-items: end;
+  text-align: right;
+}
+
+.baseline-note {
+  color: var(--muted);
 }
 
 .market-headline {
@@ -256,11 +268,11 @@ h1 {
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke: #2563eb;
+  stroke: #111827;
 }
 
 .chart-line-current {
-  stroke: #dc2626;
+  stroke: #2563eb;
 }
 
 .chart-empty-text {

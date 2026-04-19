@@ -66,6 +66,38 @@ function getLocalTimeParts(date, timezone) {
   );
 }
 
+function getLocalDateTimeMs(parts) {
+  return Date.UTC(
+    Number(parts.year),
+    Number(parts.month) - 1,
+    Number(parts.day),
+    Number(parts.hour),
+    Number(parts.minute),
+  );
+}
+
+function zonedLocalTimeToUtcIso(dateKey, hour, minute, timezone) {
+  if (!dateKey || !timezone || hour == null || minute == null) {
+    return null;
+  }
+
+  const [year, month, day] = dateKey.split("-").map(Number);
+  if (![year, month, day].every(Number.isFinite)) {
+    return null;
+  }
+
+  const desiredLocalMs = Date.UTC(year, month - 1, day, Number(hour), Number(minute));
+  let utcMs = desiredLocalMs;
+
+  for (let index = 0; index < 3; index += 1) {
+    const observedParts = getLocalTimeParts(new Date(utcMs), timezone);
+    const observedLocalMs = getLocalDateTimeMs(observedParts);
+    utcMs += desiredLocalMs - observedLocalMs;
+  }
+
+  return new Date(utcMs).toISOString();
+}
+
 function getDateKeyInfo(dateKey, timezone) {
   const parts = getLocalTimeParts(new Date(`${dateKey}T12:00:00.000Z`), timezone);
   const normalizedDateKey = `${parts.year}-${parts.month}-${parts.day}`;
@@ -331,6 +363,12 @@ function selectSnapshotBaseline(state, baselineMode) {
 }
 
 function applyBaseline(record, baselineMode, snapshotBaseline) {
+  const baselineHighlightAfter = zonedLocalTimeToUtcIso(
+    snapshotBaseline?.date,
+    record.baselineCutoverHourLocal,
+    record.baselineCutoverMinuteLocal,
+    record.baselineTimezone,
+  );
   const baseRecord = {
     id: record.id,
     marketId: record.marketId,
@@ -349,6 +387,7 @@ function applyBaseline(record, baselineMode, snapshotBaseline) {
     baselineCutoverHourLocal: record.baselineCutoverHourLocal,
     baselineCutoverMinuteLocal: record.baselineCutoverMinuteLocal,
     baselineCutoverLabelJa: record.baselineCutoverLabelJa,
+    baselineHighlightAfter,
     error: record.error,
   };
 
@@ -379,6 +418,7 @@ function applyBaseline(record, baselineMode, snapshotBaseline) {
     baselineSource: "source-prev-day",
     baselineSnapshotDate: null,
     baselineSnapshotCapturedAt: null,
+    baselineHighlightAfter: null,
   };
 }
 
@@ -511,6 +551,8 @@ function buildHistoryRun(payload) {
       baselineCutoverLabelJa: market.baselineCutoverLabelJa,
       baselineSource: market.baselineSource,
       baselineSnapshotDate: market.baselineSnapshotDate ?? null,
+      baselineSnapshotCapturedAt: market.baselineSnapshotCapturedAt ?? null,
+      baselineHighlightAfter: market.baselineHighlightAfter ?? null,
       stale: Boolean(market.stale),
       fetchedAt: market.fetchedAt,
       error: market.error ?? null,
