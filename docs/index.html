@@ -8,7 +8,7 @@
       name="description"
       content="Hyperliquid markets の現在値と基準値をシンプルに確認するページ"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260419b" />
+    <link rel="stylesheet" href="./styles.css?v=20260419c" />
   </head>
   <body>
     <div class="page-shell">
@@ -45,6 +45,12 @@
 
         <section id="market-grid" class="market-grid" aria-live="polite"></section>
       </main>
+
+      <footer class="site-note">
+        <p>
+          表示価格はHyperliquid公開APIから取得した参考値です。公式な市場データ配信、投資助言、取引執行を目的としたものではなく、遅延・欠損・誤差を含む場合があります。
+        </p>
+      </footer>
     </div>
 
     <template id="market-card-template">
@@ -109,6 +115,6 @@
       </form>
     </dialog>
 
-    <script type="module" src="./app.js?v=20260419b"></script>
+    <script type="module" src="./app.js?v=20260419c"></script>
   </body>
 </html>

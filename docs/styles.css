@@ -134,6 +134,19 @@ h1 {
   display: grid;
 }
 
+.site-note {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+.site-note p {
+  margin: 0;
+}
+
 .market-group-heading {
   margin-top: 22px;
   padding: 0 20px 10px;
