@@ -26,6 +26,7 @@ const SPARKLINE_WINDOW_HOURS = 24;
 const DETAIL_WINDOW_HOURS = 72;
 const CHART_HISTORY_FILE_COUNT = 4;
 const CHART_BACKFILL_START_ISO = "2026-04-15T00:00:00+09:00";
+const CHART_FETCH_OVERLAP_MINUTES = 10;
 
 function resolveNow() {
   const raw = process.env.BUILD_NOW;
@@ -638,6 +639,56 @@ function dedupeChartPoints(points) {
   return [...byTimestamp.values()].sort((left, right) => left.t.localeCompare(right.t));
 }
 
+function appendChartPoint(pointsByMarket, marketId, point) {
+  if (!point?.t || point.price == null) {
+    return;
+  }
+
+  if (!pointsByMarket.has(marketId)) {
+    pointsByMarket.set(marketId, []);
+  }
+
+  pointsByMarket.get(marketId).push(point);
+}
+
+function appendExistingChartPoints(pointsByMarket, existingChartPayload, validMarketIds, minTimestamp) {
+  const existingMarkets = existingChartPayload?.markets ?? {};
+
+  for (const [marketId, series] of Object.entries(existingMarkets)) {
+    if (!validMarketIds.has(marketId)) {
+      continue;
+    }
+
+    for (const point of series?.points72h || []) {
+      const pointMs = Date.parse(point.t);
+      if (!Number.isFinite(pointMs) || pointMs < minTimestamp) {
+        continue;
+      }
+
+      appendChartPoint(pointsByMarket, marketId, {
+        t: point.t,
+        price: point.price,
+        stale: Boolean(point.stale),
+      });
+    }
+  }
+}
+
+function getLatestPointTimestamp(points) {
+  let latestMs = null;
+
+  for (const point of points || []) {
+    const pointMs = Date.parse(point.t);
+    if (!Number.isFinite(pointMs)) {
+      continue;
+    }
+
+    latestMs = latestMs == null ? pointMs : Math.max(latestMs, pointMs);
+  }
+
+  return latestMs;
+}
+
 function appendLatestChartPoints(pointsByMarket, latestPayload) {
   for (const market of latestPayload.markets || []) {
     const price = pickChartPrice(market);
@@ -645,11 +696,7 @@ function appendLatestChartPoints(pointsByMarket, latestPayload) {
       continue;
     }
 
-    if (!pointsByMarket.has(market.id)) {
-      pointsByMarket.set(market.id, []);
-    }
-
-    pointsByMarket.get(market.id).push({
+    appendChartPoint(pointsByMarket, market.id, {
       t: latestPayload.updatedAt,
       price,
       stale: Boolean(market.stale),
@@ -658,6 +705,10 @@ function appendLatestChartPoints(pointsByMarket, latestPayload) {
 }
 
 async function buildChartSeriesPayload(now, markets, latestPayload) {
+  const existingChartPayload = await readJson(CHART_OUTPUT_FILE, {
+    timezone: TIME_ZONE,
+    markets: {},
+  });
   const historyIndex = await readJson(HISTORY_INDEX_FILE, {
     timezone: TIME_ZONE,
     files: [],
@@ -680,6 +731,13 @@ async function buildChartSeriesPayload(now, markets, latestPayload) {
   const pointsByMarket = new Map();
   const validMarketIds = new Set(markets.map((market) => market.id));
 
+  appendExistingChartPoints(
+    pointsByMarket,
+    existingChartPayload,
+    validMarketIds,
+    backfillStartMs,
+  );
+
   for (const historyFile of historyFiles) {
     for (const run of historyFile.runs || []) {
       const updatedMs = Date.parse(run.updatedAt);
@@ -697,11 +755,7 @@ async function buildChartSeriesPayload(now, markets, latestPayload) {
           continue;
         }
 
-        if (!pointsByMarket.has(market.id)) {
-          pointsByMarket.set(market.id, []);
-        }
-
-        pointsByMarket.get(market.id).push({
+        appendChartPoint(pointsByMarket, market.id, {
           t: run.updatedAt,
           price,
           stale: Boolean(market.stale),
@@ -713,19 +767,31 @@ async function buildChartSeriesPayload(now, markets, latestPayload) {
   await Promise.all(
     markets.map(async (market) => {
       try {
+        const existingPoints = pointsByMarket.get(market.id) || [];
+        const latestPointMs = getLatestPointTimestamp(existingPoints);
+        const fetchStartMs =
+          latestPointMs == null
+            ? backfillStartMs
+            : Math.max(
+                backfillStartMs,
+                latestPointMs - CHART_FETCH_OVERLAP_MINUTES * 60 * 1000,
+              );
+
+        if (now.getTime() - fetchStartMs < 60 * 1000) {
+          return;
+        }
+
         const candlePoints = await fetchMarketCandlePoints(
           market,
-          backfillStartMs,
+          fetchStartMs,
           now.getTime(),
         );
 
-        if (!pointsByMarket.has(market.id)) {
-          pointsByMarket.set(market.id, []);
+        for (const point of candlePoints) {
+          appendChartPoint(pointsByMarket, market.id, point);
         }
-
-        pointsByMarket.get(market.id).push(...candlePoints);
       } catch {
-        // 通常の5分履歴があればチャートは継続できるため、バックフィル失敗は握りつぶす。
+        // 保存済みチャートや通常の5分履歴があれば継続できるため、差分取得失敗は握りつぶす。
       }
     }),
   );
