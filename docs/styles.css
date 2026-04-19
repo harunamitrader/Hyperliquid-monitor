@@ -50,8 +50,7 @@ a {
 .metric-label,
 .headline-cell,
 .summary-text,
-.updated-at,
-.market-baseline {
+.updated-at {
   font-family: "IBM Plex Mono", monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -205,12 +204,6 @@ h1 {
 .market-name-link:focus-visible {
   text-decoration: underline;
   text-underline-offset: 0.14em;
-}
-
-.market-baseline {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 0.7rem;
 }
 
 .market-metric {
@@ -485,12 +478,6 @@ h1 {
     max-width: 22ch;
   }
 
-  .market-baseline {
-    margin-top: 6px;
-    font-size: 0.58rem;
-    letter-spacing: 0.04em;
-  }
-
   .metric-value {
     font-size: 0.84rem;
   }
@@ -609,12 +596,6 @@ h1 {
     font-size: 0.84rem;
     max-width: none;
     padding-right: 4px;
-  }
-
-  .market-baseline {
-    margin-top: 3px;
-    font-size: 0.48rem;
-    line-height: 1.15;
   }
 
   .metric-label {

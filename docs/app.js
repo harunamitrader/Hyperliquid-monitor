@@ -106,24 +106,6 @@ function applyMoveClass(node, value) {
   }
 }
 
-function buildBaselineText(market) {
-  const parts = [market.baselineLabelJa || "前日終値"];
-
-  if (market.baselineCutoverLabelJa) {
-    parts.push(market.baselineCutoverLabelJa);
-  }
-
-  if (!String(market.baselineSource || "").startsWith("snapshot")) {
-    parts.push("代替値");
-  }
-
-  if (market.stale) {
-    parts.push("古い値");
-  }
-
-  return parts.join(" / ");
-}
-
 function createSvgNode(name, attributes = {}) {
   const node = document.createElementNS(SVG_NS, name);
 
@@ -634,7 +616,6 @@ function renderMarket(market, chartPayload, timezone) {
   const fragment = template.content.cloneNode(true);
   const card = fragment.querySelector(".market-card");
   const marketName = fragment.querySelector(".market-name");
-  const marketBaseline = fragment.querySelector(".market-baseline");
   const currentPrice = fragment.querySelector(".current-price");
   const baselinePrice = fragment.querySelector(".baseline-price");
   const changeValue = fragment.querySelector(".change-value");
@@ -646,7 +627,6 @@ function renderMarket(market, chartPayload, timezone) {
 
   marketName.textContent = market.name;
   marketName.href = market.url;
-  marketBaseline.textContent = buildBaselineText(market);
   currentPrice.textContent = formatNumber(market.currentPrice, 4);
   baselinePrice.textContent = formatNumber(market.baselinePrice, 4);
   changeValue.textContent = formatSigned(market.change, 4);
