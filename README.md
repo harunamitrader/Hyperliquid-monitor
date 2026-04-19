@@ -2,7 +2,7 @@
 
 公開ページ予定: `https://harunamitrader.github.io/Hyperliquid-monitor/`
 
-Hyperliquid 上の trade[XYZ] / `xyz` マーケットを 5 分ごとに取得し、GitHub Pages で公開するためのシンプルな監視ページです。
+Hyperliquid 上の24時間取引されるperpマーケットを 5 分ごとに取得し、GitHub Pages で公開するためのシンプルな監視ページです。
 
 現行の `weekend_monitor` と同じ構成を前提にしています。Cloudflare Worker は GitHub Actions を起動するだけで、データ取得とJSON生成は GitHub Actions 上の `npm run build:data` が担当します。
 
@@ -10,7 +10,7 @@ Hyperliquid 上の trade[XYZ] / `xyz` マーケットを 5 分ごとに取得し
 
 - `docs/`: 公開用の静的ページ
 - `docs/data/latest.json`: フロントエンドが読む最新データ
-- `docs/data/chart-series.json`: 24時間/72時間チャート用データ
+- `docs/data/chart-series.json`: 24時間/2026年4月15日以降チャート用データ
 - `scripts/`: Hyperliquid API 取得とデータ生成スクリプト
 - `data/markets.json`: 監視対象銘柄の固定定義
 - `data/snapshots/baselines.json`: 前日終値・金曜終値の保存状態
@@ -21,26 +21,27 @@ Hyperliquid 上の trade[XYZ] / `xyz` マーケットを 5 分ごとに取得し
 
 ## 取得元
 
-Hyperliquid の公開 `info` API を使います。
+Hyperliquid の公開 `info` API を使います。`app.trade.xyz` のHTMLスクレイピングは使いません。
 
 - Endpoint: `https://api.hyperliquid.xyz/info`
-- DEX: `xyz`
+- DEX: default, `xyz`, `km`
 - 主な利用API:
   - `metaAndAssetCtxs`
   - `l2Book`
   - `candleSnapshot`
 
-`app.trade.xyz` のHTMLスクレイピングは使いません。
+銘柄リンクは `https://app.hyperliquid.xyz/trade` の対象マーケットを開くURLにしています。
 
 ## 監視対象
 
 初期定義は `data/markets.json` にあります。
 
-- 株価指数: `SP500`, `XYZ100`, `JP225-USDC`, `JP225-JPY`, `EWJ`, `EWY`
-- 為替: `USDJPY`, `EURUSD`
-- 商品: `Gold`, `Silver`, `WTI Oil`, `Brent Oil`, `Natural Gas`, `Copper`
+- 株価指数: `SP500`, `US Tech 100`, `JP225`
+- 商品: `Gold`, `Silver`, `Platinum`, `Copper`, `WTI Oil`, `Natural Gas`
+- 為替: `USDJPY`, `EURJPY`, `EURUSD`
+- 暗号資産: `Bitcoin`, `Ethereum`
 
-`JP225-JPY` は `xyz:JP225 * xyz:JPY` の派生値として計算します。`xyz:JP225` 自体も指数値として表示するため、用途に応じて両方を比較できます。
+`EURJPY` は `xyz:EUR * xyz:JPY` の派生値として計算します。`Dow 30`, `Euro Stoxx 50`, `Hang Seng`, `VIX`, `Corn` はHyperliquid API上で24時間動く上場中マーケットが確認できないため、監視対象から外しています。
 
 ## 基準価格ロジック
 

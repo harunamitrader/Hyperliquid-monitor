@@ -19,17 +19,22 @@ const MARKET_GROUPS = [
   {
     key: "stock-indices",
     label: "株価指数",
-    ids: ["sp500", "xyz100", "jp225-usdc", "jp225-jpy", "ewj", "ewy"],
+    ids: ["sp500", "nasdaq100", "jp225"],
   },
   {
     key: "commodities",
     label: "商品",
-    ids: ["gold", "silver", "wti-oil", "brent-oil", "natural-gas", "copper"],
+    ids: ["gold", "silver", "platinum", "copper", "wti-oil", "natural-gas"],
   },
   {
     key: "fx",
     label: "為替",
-    ids: ["usdjpy", "eurusd"],
+    ids: ["usdjpy", "eurjpy", "eurusd"],
+  },
+  {
+    key: "crypto",
+    label: "暗号資産",
+    ids: ["bitcoin", "ethereum"],
   },
 ];
 
@@ -579,10 +584,12 @@ function updateChartDialog(market, chartPayload, timezone) {
   const summary = summarizeSeries(points);
 
   chartDialogTitle.textContent = market.name;
-  chartDialogCaption.textContent = `過去${chartPayload?.detailWindowHours ?? 72}時間`;
+  chartDialogCaption.textContent =
+    chartPayload?.detailWindowLabelJa ??
+    `過去${chartPayload?.detailWindowHours ?? 72}時間`;
 
   if (!summary) {
-    chartDialogMeta.textContent = "72時間分の履歴がまだありません。";
+    chartDialogMeta.textContent = "チャート履歴がまだありません。";
     chartDialogStart.textContent = "";
     chartDialogEnd.textContent = "";
     renderDetailedChart(chartDialogSvg, [], timezone);

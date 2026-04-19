@@ -1,7 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { fetchMarketPage } from "./fetch-hyperliquid-market.mjs";
+import {
+  fetchMarketCandlePoints,
+  fetchMarketPage,
+} from "./fetch-hyperliquid-market.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.resolve(__dirname, "..");
@@ -22,6 +25,7 @@ const BASELINE_STATE_VERSION = 3;
 const SPARKLINE_WINDOW_HOURS = 24;
 const DETAIL_WINDOW_HOURS = 72;
 const CHART_HISTORY_FILE_COUNT = 4;
+const CHART_BACKFILL_START_ISO = "2026-04-15T00:00:00+09:00";
 
 function resolveNow() {
   const raw = process.env.BUILD_NOW;
@@ -592,7 +596,26 @@ function dedupeChartPoints(points) {
   return [...byTimestamp.values()].sort((left, right) => left.t.localeCompare(right.t));
 }
 
-async function buildChartSeriesPayload(now) {
+function appendLatestChartPoints(pointsByMarket, latestPayload) {
+  for (const market of latestPayload.markets || []) {
+    const price = pickChartPrice(market);
+    if (price == null) {
+      continue;
+    }
+
+    if (!pointsByMarket.has(market.id)) {
+      pointsByMarket.set(market.id, []);
+    }
+
+    pointsByMarket.get(market.id).push({
+      t: latestPayload.updatedAt,
+      price,
+      stale: Boolean(market.stale),
+    });
+  }
+}
+
+async function buildChartSeriesPayload(now, markets, latestPayload) {
   const historyIndex = await readJson(HISTORY_INDEX_FILE, {
     timezone: TIME_ZONE,
     files: [],
@@ -610,7 +633,10 @@ async function buildChartSeriesPayload(now) {
 
   const detailCutoff = now.getTime() - DETAIL_WINDOW_HOURS * 60 * 60 * 1000;
   const sparklineCutoff = now.getTime() - SPARKLINE_WINDOW_HOURS * 60 * 60 * 1000;
+  const backfillStart = new Date(CHART_BACKFILL_START_ISO);
+  const backfillStartMs = backfillStart.getTime();
   const pointsByMarket = new Map();
+  const validMarketIds = new Set(markets.map((market) => market.id));
 
   for (const historyFile of historyFiles) {
     for (const run of historyFile.runs || []) {
@@ -620,6 +646,10 @@ async function buildChartSeriesPayload(now) {
       }
 
       for (const market of run.markets || []) {
+        if (!validMarketIds.has(market.id)) {
+          continue;
+        }
+
         const price = pickChartPrice(market);
         if (price == null) {
           continue;
@@ -638,7 +668,29 @@ async function buildChartSeriesPayload(now) {
     }
   }
 
-  const markets = Object.fromEntries(
+  await Promise.all(
+    markets.map(async (market) => {
+      try {
+        const candlePoints = await fetchMarketCandlePoints(
+          market,
+          backfillStartMs,
+          now.getTime(),
+        );
+
+        if (!pointsByMarket.has(market.id)) {
+          pointsByMarket.set(market.id, []);
+        }
+
+        pointsByMarket.get(market.id).push(...candlePoints);
+      } catch {
+        // 通常の5分履歴があればチャートは継続できるため、バックフィル失敗は握りつぶす。
+      }
+    }),
+  );
+
+  appendLatestChartPoints(pointsByMarket, latestPayload);
+
+  const chartMarkets = Object.fromEntries(
     [...pointsByMarket.entries()].map(([marketId, rawPoints]) => {
       const points72h = dedupeChartPoints(rawPoints);
       const points24h = points72h.filter(
@@ -660,7 +712,9 @@ async function buildChartSeriesPayload(now) {
     timezone: TIME_ZONE,
     sparklineWindowHours: SPARKLINE_WINDOW_HOURS,
     detailWindowHours: DETAIL_WINDOW_HOURS,
-    markets,
+    detailWindowStart: backfillStart.toISOString(),
+    detailWindowLabelJa: "2026/04/15以降",
+    markets: chartMarkets,
   };
 }
 
@@ -779,7 +833,10 @@ async function main() {
   await writeJson(SNAPSHOT_FILE, payload);
   await writeJson(BASELINE_STATE_FILE, nextBaselineState);
   await appendHistory(payload, nowInfo);
-  await writeJson(CHART_OUTPUT_FILE, await buildChartSeriesPayload(now));
+  await writeJson(
+    CHART_OUTPUT_FILE,
+    await buildChartSeriesPayload(now, markets, payload),
+  );
 
   const freshCount = normalizedMarkets.filter((market) => !market.stale).length;
   const staleCount = normalizedMarkets.length - freshCount;

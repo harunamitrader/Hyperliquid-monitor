@@ -1,5 +1,4 @@
 const INFO_ENDPOINT = "https://api.hyperliquid.xyz/info";
-const DEX_NAME = "xyz";
 const CANDLE_INTERVAL = "15m";
 const CANDLE_WINDOW_HOURS = 24;
 
@@ -9,7 +8,7 @@ const REQUEST_HEADERS = {
   "user-agent": "hyperliquid-monitor/0.1",
 };
 
-let assetContextsPromise = null;
+const assetContextsPromises = new Map();
 const l2BookPromises = new Map();
 const candlePromises = new Map();
 
@@ -30,6 +29,11 @@ function round(value, digits = 4) {
   return Number(value.toFixed(digits));
 }
 
+function getCoinDex(coin) {
+  const separatorIndex = coin.indexOf(":");
+  return separatorIndex > 0 ? coin.slice(0, separatorIndex) : "";
+}
+
 async function fetchInfo(body) {
   const response = await fetch(INFO_ENDPOINT, {
     method: "POST",
@@ -47,32 +51,42 @@ async function fetchInfo(body) {
   return response.json();
 }
 
-async function getAssetContexts() {
-  if (!assetContextsPromise) {
-    assetContextsPromise = fetchInfo({
+async function getAssetContexts(dexName) {
+  const cacheKey = dexName || "default";
+
+  if (!assetContextsPromises.has(cacheKey)) {
+    const body = {
       type: "metaAndAssetCtxs",
-      dex: DEX_NAME,
-    }).then((payload) => {
-      const universe = payload?.[0]?.universe;
-      const contexts = payload?.[1];
+    };
 
-      if (!Array.isArray(universe) || !Array.isArray(contexts)) {
-        throw new Error("Hyperliquid metaAndAssetCtxs の形式が不正です。");
-      }
+    if (dexName) {
+      body.dex = dexName;
+    }
 
-      return new Map(
-        universe.map((asset, index) => [
-          asset.name,
-          {
-            asset,
-            context: contexts[index] ?? {},
-          },
-        ]),
-      );
-    });
+    assetContextsPromises.set(
+      cacheKey,
+      fetchInfo(body).then((payload) => {
+        const universe = payload?.[0]?.universe;
+        const contexts = payload?.[1];
+
+        if (!Array.isArray(universe) || !Array.isArray(contexts)) {
+          throw new Error("Hyperliquid metaAndAssetCtxs の形式が不正です。");
+        }
+
+        return new Map(
+          universe.map((asset, index) => [
+            asset.name,
+            {
+              asset,
+              context: contexts[index] ?? {},
+            },
+          ]),
+        );
+      }),
+    );
   }
 
-  return assetContextsPromise;
+  return assetContextsPromises.get(cacheKey);
 }
 
 function pickContextPrice(context) {
@@ -126,6 +140,36 @@ async function fetchCandles(coin) {
   return candlePromises.get(key);
 }
 
+async function fetchCandlesRange(coin, startTime, endTime, interval = "5m") {
+  const chunkMs = 24 * 60 * 60 * 1000;
+  const requests = [];
+
+  for (let cursor = startTime; cursor < endTime; cursor += chunkMs) {
+    const chunkEnd = Math.min(cursor + chunkMs, endTime);
+    const key = `${coin}:${interval}:${cursor}:${chunkEnd}`;
+
+    if (!candlePromises.has(key)) {
+      candlePromises.set(
+        key,
+        fetchInfo({
+          type: "candleSnapshot",
+          req: {
+            coin,
+            interval,
+            startTime: cursor,
+            endTime: chunkEnd,
+          },
+        }).catch(() => []),
+      );
+    }
+
+    requests.push(candlePromises.get(key));
+  }
+
+  const chunks = await Promise.all(requests);
+  return chunks.flat();
+}
+
 function summarizeCandles(candles) {
   const highs = [];
   const lows = [];
@@ -150,11 +194,15 @@ function summarizeCandles(candles) {
 }
 
 async function loadSourceMarket(coin) {
-  const contexts = await getAssetContexts();
+  const contexts = await getAssetContexts(getCoinDex(coin));
   const entry = contexts.get(coin);
 
   if (!entry) {
     throw new Error(`Hyperliquid 銘柄が見つかりません: ${coin}`);
+  }
+
+  if (entry.asset?.isDelisted) {
+    throw new Error(`Hyperliquid 銘柄はdelistedです: ${coin}`);
   }
 
   const { context } = entry;
@@ -253,6 +301,38 @@ function combineCandleProducts(leftCandles, rightCandles) {
   };
 }
 
+function combineCandleCloseProducts(leftCandles, rightCandles) {
+  const rightByTime = new Map((rightCandles || []).map((candle) => [candle.t, candle]));
+  const points = [];
+
+  for (const left of leftCandles || []) {
+    const right = rightByTime.get(left.t);
+    if (!right) {
+      continue;
+    }
+
+    const leftClose = parseNumber(left.c);
+    const rightClose = parseNumber(right.c);
+    const timestamp = Number(left.t);
+
+    if (
+      leftClose == null ||
+      rightClose == null ||
+      !Number.isFinite(timestamp)
+    ) {
+      continue;
+    }
+
+    points.push({
+      t: new Date(timestamp).toISOString(),
+      price: round(leftClose * rightClose, 6),
+      stale: false,
+    });
+  }
+
+  return points;
+}
+
 async function fetchDerivedMarket(market) {
   if (market.derived?.operation !== "multiply") {
     throw new Error(`未対応の派生銘柄です: ${market.id}`);
@@ -285,10 +365,49 @@ async function fetchDerivedMarket(market) {
   });
 }
 
+function candleClosePoint(candle) {
+  const price = parseNumber(candle.c);
+  const timestamp = Number(candle.t);
+
+  if (price == null || !Number.isFinite(timestamp)) {
+    return null;
+  }
+
+  return {
+    t: new Date(timestamp).toISOString(),
+    price: round(price, 6),
+    stale: false,
+  };
+}
+
 export async function fetchMarketPage(market) {
   if (market.derived) {
     return fetchDerivedMarket(market);
   }
 
   return buildBaseRecord(market, await loadSourceMarket(market.marketId));
+}
+
+export async function fetchMarketCandlePoints(market, startTime, endTime) {
+  if (market.derived) {
+    if (market.derived.operation !== "multiply") {
+      throw new Error(`未対応の派生銘柄です: ${market.id}`);
+    }
+
+    const sourceCoins = market.derived.sources || [];
+    if (sourceCoins.length !== 2) {
+      throw new Error(`派生銘柄のsourcesは2銘柄にしてください: ${market.id}`);
+    }
+
+    const [leftCandles, rightCandles] = await Promise.all(
+      sourceCoins.map((coin) =>
+        fetchCandlesRange(coin, startTime, endTime, "5m"),
+      ),
+    );
+
+    return combineCandleCloseProducts(leftCandles, rightCandles);
+  }
+
+  const candles = await fetchCandlesRange(market.marketId, startTime, endTime, "5m");
+  return candles.map(candleClosePoint).filter(Boolean);
 }
