@@ -18,7 +18,13 @@
       "file": "data/history/2026-04-21.json",
       "runCount": 288,
       "latestUpdatedAt": "2026-04-21T14:56:04.150Z"
+    },
+    {
+      "date": "2026-04-22",
+      "file": "data/history/2026-04-22.json",
+      "runCount": 1,
+      "latestUpdatedAt": "2026-04-21T15:01:07.730Z"
     }
   ],
-  "updatedAt": "2026-04-21T14:56:04.150Z"
+  "updatedAt": "2026-04-21T15:01:07.730Z"
 }
