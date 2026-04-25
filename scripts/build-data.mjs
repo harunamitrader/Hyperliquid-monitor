@@ -735,7 +735,7 @@ async function buildChartSeriesPayload(now, markets, latestPayload) {
     pointsByMarket,
     existingChartPayload,
     validMarketIds,
-    backfillStartMs,
+    detailCutoff,
   );
 
   for (const historyFile of historyFiles) {
@@ -771,9 +771,9 @@ async function buildChartSeriesPayload(now, markets, latestPayload) {
         const latestPointMs = getLatestPointTimestamp(existingPoints);
         const fetchStartMs =
           latestPointMs == null
-            ? backfillStartMs
+            ? Math.max(backfillStartMs, detailCutoff)
             : Math.max(
-                backfillStartMs,
+                detailCutoff,
                 latestPointMs - CHART_FETCH_OVERLAP_MINUTES * 60 * 1000,
               );
 
@@ -800,7 +800,9 @@ async function buildChartSeriesPayload(now, markets, latestPayload) {
 
   const chartMarkets = Object.fromEntries(
     [...pointsByMarket.entries()].map(([marketId, rawPoints]) => {
-      const points72h = dedupeChartPoints(rawPoints);
+      const points72h = dedupeChartPoints(rawPoints).filter(
+        (point) => Date.parse(point.t) >= detailCutoff,
+      );
       const points24h = points72h.filter(
         (point) => Date.parse(point.t) >= sparklineCutoff,
       );
@@ -820,7 +822,7 @@ async function buildChartSeriesPayload(now, markets, latestPayload) {
     timezone: TIME_ZONE,
     sparklineWindowHours: SPARKLINE_WINDOW_HOURS,
     detailWindowHours: DETAIL_WINDOW_HOURS,
-    detailWindowStart: backfillStart.toISOString(),
+    detailWindowStart: new Date(detailCutoff).toISOString(),
     detailWindowLabelJa: `過去${DETAIL_WINDOW_HOURS}時間`,
     markets: chartMarkets,
   };
