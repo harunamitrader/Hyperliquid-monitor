@@ -821,7 +821,7 @@ async function buildChartSeriesPayload(now, markets, latestPayload) {
     sparklineWindowHours: SPARKLINE_WINDOW_HOURS,
     detailWindowHours: DETAIL_WINDOW_HOURS,
     detailWindowStart: backfillStart.toISOString(),
-    detailWindowLabelJa: "2026/04/15以降",
+    detailWindowLabelJa: `過去${DETAIL_WINDOW_HOURS}時間`,
     markets: chartMarkets,
   };
 }
