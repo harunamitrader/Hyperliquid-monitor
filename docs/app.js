@@ -626,7 +626,19 @@ function renderMarket(market, chartPayload, timezone) {
   const detailPoints = getChartPoints(chartPayload, market.id, "points72h");
 
   marketName.textContent = market.name;
-  marketName.href = market.url;
+  if (market.url) {
+    marketName.href = market.url;
+    marketName.target = "_blank";
+    marketName.rel = "noreferrer";
+    marketName.classList.add("market-name-link");
+    marketName.removeAttribute("aria-disabled");
+  } else {
+    marketName.removeAttribute("href");
+    marketName.removeAttribute("target");
+    marketName.removeAttribute("rel");
+    marketName.classList.remove("market-name-link");
+    marketName.setAttribute("aria-disabled", "true");
+  }
   currentPrice.textContent = formatNumber(market.currentPrice, 4);
   baselinePrice.textContent = formatNumber(market.baselinePrice, 4);
   changeValue.textContent = formatSigned(market.change, 4);
