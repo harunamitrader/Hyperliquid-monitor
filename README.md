@@ -6,6 +6,8 @@ Hyperliquid 上の24時間取引されるperpマーケットを 5 分ごとに�
 
 現行の `weekend_monitor` と同じ構成を前提にしています。Cloudflare Worker は GitHub Actions を起動するだけで、データ取得とJSON生成は GitHub Actions 上の `npm run build:data` が担当します。
 
+![Hyperliquid Monitor 概要図](docs/hyperliquid-monitor.png)
+
 ## 構成
 
 - `docs/`: 公開用の静的ページ
