@@ -192,7 +192,13 @@
       "file": "data/history/2026-05-20.json",
       "runCount": 288,
       "latestUpdatedAt": "2026-05-20T14:56:38.039Z"
+    },
+    {
+      "date": "2026-05-21",
+      "file": "data/history/2026-05-21.json",
+      "runCount": 1,
+      "latestUpdatedAt": "2026-05-20T15:01:29.474Z"
     }
   ],
-  "updatedAt": "2026-05-20T14:56:38.039Z"
+  "updatedAt": "2026-05-20T15:01:29.474Z"
 }
