@@ -10,10 +10,10 @@
     "baselineCutoverLabelJa": "06:00/07:00 JST"
   },
   {
-    "id": "nasdaq100",
-    "marketId": "km:USTECH",
-    "name": "US Tech 100",
-    "url": "https://app.hyperliquid.xyz/trade/km:USTECH",
+    "id": "xyz100",
+    "marketId": "xyz:XYZ100",
+    "name": "XYZ100-USDC",
+    "url": "https://app.hyperliquid.xyz/trade/xyz:XYZ100",
     "baselineTimezone": "America/New_York",
     "baselineCutoverHourLocal": 17,
     "baselineCutoverMinuteLocal": 0,
