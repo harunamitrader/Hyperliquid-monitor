@@ -38,7 +38,7 @@ Hyperliquid の公開 `info` API を使います。`app.trade.xyz` のHTMLスク
 
 初期定義は `data/markets.json` にあります。
 
-- 株価指数: `SP500`, `US Tech 100`, `JP225`
+- 株価指数: `SP500`, `XYZ100-USDC`, `JP225`
 - 商品: `Gold`, `Silver`, `Platinum`, `Copper`, `WTI Oil`, `Natural Gas`
 - 為替: `USDJPY`, `EURJPY`, `EURUSD`
 - 暗号資産: `Bitcoin`, `Ethereum`

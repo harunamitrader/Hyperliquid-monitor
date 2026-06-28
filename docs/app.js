@@ -19,7 +19,7 @@ const MARKET_GROUPS = [
   {
     key: "stock-indices",
     label: "株価指数",
-    ids: ["sp500", "nasdaq100", "jp225"],
+    ids: ["sp500", "xyz100", "jp225"],
   },
   {
     key: "commodities",
