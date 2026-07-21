@@ -564,7 +564,13 @@
       "file": "data/history/2026-07-21.json",
       "runCount": 288,
       "latestUpdatedAt": "2026-07-21T14:58:04.131Z"
+    },
+    {
+      "date": "2026-07-22",
+      "file": "data/history/2026-07-22.json",
+      "runCount": 1,
+      "latestUpdatedAt": "2026-07-21T15:02:31.235Z"
     }
   ],
-  "updatedAt": "2026-07-21T14:58:04.131Z"
+  "updatedAt": "2026-07-21T15:02:31.235Z"
 }
