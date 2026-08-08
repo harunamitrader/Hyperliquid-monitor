@@ -9,8 +9,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 7740,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 7740.15,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -36,8 +36,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 29689.5,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 29691.5,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -63,8 +63,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 66019,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 66016.5,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -90,8 +90,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 4352.35,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 4351.85,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -117,8 +117,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 64.1055,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 64.1245,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -144,8 +144,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 1756.75,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 1756.85,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -172,7 +172,7 @@
         "date": "2026-08-08",
         "weekday": "Sat",
         "closePrice": 6.63625,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -198,8 +198,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 76.6995,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 76.7075,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -225,8 +225,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 2.6793,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 2.67925,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -253,7 +253,7 @@
         "date": "2026-08-08",
         "weekday": "Sat",
         "closePrice": 158.015,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -280,7 +280,7 @@
         "date": "2026-08-08",
         "weekday": "Sat",
         "closePrice": 182.649538,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -307,7 +307,7 @@
         "date": "2026-08-08",
         "weekday": "Sat",
         "closePrice": 1.1559,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -333,8 +333,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 64920.5,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 64886.5,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
@@ -360,8 +360,8 @@
       "currentSession": {
         "date": "2026-08-08",
         "weekday": "Sat",
-        "closePrice": 1914.15,
-        "capturedAt": "2026-08-08T01:11:55.130Z",
+        "closePrice": 1913.35,
+        "capturedAt": "2026-08-08T01:17:00.476Z",
         "seeded": false
       },
       "previousClose": {
