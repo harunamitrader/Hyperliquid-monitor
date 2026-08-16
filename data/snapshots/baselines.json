@@ -333,8 +333,8 @@
       "currentSession": {
         "date": "2026-08-16",
         "weekday": "Sun",
-        "closePrice": 63052.5,
-        "capturedAt": "2026-08-16T00:02:56.053Z",
+        "closePrice": 63043.5,
+        "capturedAt": "2026-08-16T00:07:49.375Z",
         "seeded": false
       },
       "previousClose": {
@@ -360,8 +360,8 @@
       "currentSession": {
         "date": "2026-08-16",
         "weekday": "Sun",
-        "closePrice": 1882.15,
-        "capturedAt": "2026-08-16T00:02:56.053Z",
+        "closePrice": 1881.95,
+        "capturedAt": "2026-08-16T00:07:49.375Z",
         "seeded": false
       },
       "previousClose": {
