@@ -744,7 +744,13 @@
       "file": "data/history/2026-08-20.json",
       "runCount": 287,
       "latestUpdatedAt": "2026-08-20T14:58:04.177Z"
+    },
+    {
+      "date": "2026-08-21",
+      "file": "data/history/2026-08-21.json",
+      "runCount": 1,
+      "latestUpdatedAt": "2026-08-20T15:02:54.473Z"
     }
   ],
-  "updatedAt": "2026-08-20T14:58:04.177Z"
+  "updatedAt": "2026-08-20T15:02:54.473Z"
 }
