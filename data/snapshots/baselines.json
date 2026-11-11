@@ -7,17 +7,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 7621.15,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 7617.65,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 7533.45,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -34,17 +34,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 28323.5,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 28316.5,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 27808.5,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -61,17 +61,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 61868.5,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 61874,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 60165.5,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -88,17 +88,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 3992.45,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 3990.85,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 4033.85,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -115,17 +115,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 51.693,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 51.6915,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 51.574,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -142,17 +142,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 1539.9,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 1538.55,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 1541.55,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -169,17 +169,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
-        "date": "2026-11-11",
-        "weekday": "Wed",
-        "closePrice": 6.34525,
-        "capturedAt": "2026-11-11T21:59:17.640Z",
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 6.35065,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
         "seeded": false
       },
       "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 6.3319,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
+        "date": "2026-11-11",
+        "weekday": "Wed",
+        "closePrice": 6.3453,
+        "capturedAt": "2026-11-11T21:59:17.640Z",
         "seeded": false
       },
       "fridayClose": {
@@ -196,17 +196,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 85.5055,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 85.4455,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 85.6655,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -223,17 +223,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 3.59715,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 3.5938,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 3.5184,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -250,17 +250,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 159.675,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 159.705,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 158.665,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -277,17 +277,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
-        "date": "2026-11-11",
-        "weekday": "Wed",
-        "closePrice": 177.200683,
-        "capturedAt": "2026-11-11T21:59:17.640Z",
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 177.199331,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
         "seeded": false
       },
       "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 177.2367,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
+        "date": "2026-11-11",
+        "weekday": "Wed",
+        "closePrice": 177.2007,
+        "capturedAt": "2026-11-11T21:59:17.640Z",
         "seeded": false
       },
       "fridayClose": {
@@ -304,17 +304,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
-        "date": "2026-11-11",
-        "weekday": "Wed",
-        "closePrice": 1.10955,
-        "capturedAt": "2026-11-11T21:59:17.640Z",
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 1.10975,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
         "seeded": false
       },
       "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 1.1171,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
+        "date": "2026-11-11",
+        "weekday": "Wed",
+        "closePrice": 1.1096,
+        "capturedAt": "2026-11-11T21:59:17.640Z",
         "seeded": false
       },
       "fridayClose": {
@@ -331,17 +331,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 74405.5,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 74359.5,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 73835.5,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
@@ -358,17 +358,17 @@
       "cutoverMinuteLocal": 0,
       "cutoverLabelJa": "06:00/07:00 JST",
       "currentSession": {
+        "date": "2026-11-12",
+        "weekday": "Thu",
+        "closePrice": 2070.85,
+        "capturedAt": "2026-11-11T22:04:10.845Z",
+        "seeded": false
+      },
+      "previousClose": {
         "date": "2026-11-11",
         "weekday": "Wed",
         "closePrice": 2070.05,
         "capturedAt": "2026-11-11T21:59:17.640Z",
-        "seeded": false
-      },
-      "previousClose": {
-        "date": "2026-11-10",
-        "weekday": "Tue",
-        "closePrice": 2056.15,
-        "capturedAt": "2026-11-10T21:58:24.876Z",
         "seeded": false
       },
       "fridayClose": {
