@@ -1296,7 +1296,13 @@
       "file": "data/history/2026-11-20.json",
       "runCount": 279,
       "latestUpdatedAt": "2026-11-20T14:58:53.471Z"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "data/history/2026-11-21.json",
+      "runCount": 1,
+      "latestUpdatedAt": "2026-11-20T15:04:12.729Z"
     }
   ],
-  "updatedAt": "2026-11-20T14:58:53.471Z"
+  "updatedAt": "2026-11-20T15:04:12.729Z"
 }
