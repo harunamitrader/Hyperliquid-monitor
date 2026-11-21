@@ -279,7 +279,7 @@
       "currentSession": {
         "date": "2026-11-21",
         "weekday": "Sat",
-        "closePrice": 173.72702,
+        "closePrice": 173.727,
         "capturedAt": "2026-11-21T09:28:47.147Z",
         "seeded": false
       },
@@ -306,7 +306,7 @@
       "currentSession": {
         "date": "2026-11-21",
         "weekday": "Sat",
-        "closePrice": 1.09645,
+        "closePrice": 1.0964,
         "capturedAt": "2026-11-21T09:28:47.147Z",
         "seeded": false
       },
